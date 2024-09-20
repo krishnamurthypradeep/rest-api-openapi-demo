@@ -5,11 +5,12 @@ import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.rest.api.ProductApi;
 import com.myapp.rest.model.Product;
 import com.myapp.rest.service.ProductService;
 
 @RestController
-public class ProductController {
+public class ProductController implements ProductApi{
 
 	private final ProductService productService;
 
@@ -19,7 +20,8 @@ public class ProductController {
 	}
 	
 	
-	public ResponseEntity<Iterable<Product>> getProducts(){
+	
+	public ResponseEntity<Iterable<Product>> queryProducts(){
 		return ok(productService.getAllProducts());
 	}
 	
