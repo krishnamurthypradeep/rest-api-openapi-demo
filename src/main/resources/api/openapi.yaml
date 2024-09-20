@@ -30,6 +30,52 @@ tags:
     description: Operations about products
  
 paths:
+  /api/v1/products:
+    get:
+      tags:
+        - product
+      summary: Returns all the matched products
+      description: Returns the products that matches the given query criteria
+      operationId: queryProducts
+      
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - product
+      summary: Returns a product
+      description: Returns the product that matches the given product ID
+      operationId: getProduct
+      parameters:
+        - name: id
+          in: path
+          description: Product Identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: For successful fetch.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'	
   /api/v1/carts/{customerId}:
     get:
       tags:
@@ -278,4 +324,23 @@ components:
           description: The item's price per unit
           type: number
           format: double
+    Product:
+      description: Product information
+      type: object
+      properties:
+        id:
+          description: Product identifier
+          type: string
+        name:
+          description: Product Name
+          type: string
+        description:
+          description: Prodcut's description
+          type: string
+        imageUrl:
+          description: Product image's URL
+          type: string
+        price:
+          description: Product price
+          type: double     
  
